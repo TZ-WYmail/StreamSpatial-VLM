@@ -1,0 +1,26 @@
+# ============================================================
+# 消融组 B：门控阈值 τ 敏感性分析
+# ============================================================
+
+_base_: "../streamspatial_default.yaml"
+
+ablation_group: "B"
+ablation_name: "门控阈值 τ 敏感性"
+
+variants:
+  - name: "B-1_tau=0.05"
+    gate: {tau: 0.05}
+  - name: "B-2_tau=0.10"
+    gate: {tau: 0.10}
+  - name: "B-3_tau=0.15"
+    gate: {tau: 0.15}
+  - name: "B-4_tau=0.20"
+    gate: {tau: 0.20}
+  - name: "B-5_tau=0.25"
+    gate: {tau: 0.25}
+  - name: "B-6_tau=0.30"
+    gate: {tau: 0.30}
+
+eval:
+  datasets: ["spar7m"]
+  metrics: ["accuracy", "fps", "gate_trigger_rate"]

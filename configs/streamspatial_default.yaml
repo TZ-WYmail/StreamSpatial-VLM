@@ -1,0 +1,46 @@
+# ============================================================
+# 默认配置：StreamSpatial-VLM 完整框架
+# 对应消融组 A-4：Gate + Zip + KV（Ours）
+# ============================================================
+
+model:
+  vlm_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+  vggt_name: "facebook/vggt-1b"
+  device: "cuda"
+  dtype: "float16"
+
+# 开启所有加速模块
+modules:
+  use_gate: true
+  use_zip: true
+  use_incremental: true
+
+gate:
+  tau: 0.15                # 余弦距离阈值，默认值
+  history_step: 1          # 与前 k 帧比较
+  warmup_frames: 1         # 前 N 帧强制触发 3D
+
+zip:
+  keep_ratio: 0.50         # 保留 50% patch token
+  alpha: 0.60              # 深度方差权重
+  beta: 0.40               # 位姿熵权重
+  patch_size: 14           # ViT patch 大小（像素）
+  min_keep: 16             # 最少保留 token 数
+
+kv_cache:
+  window_size: 8           # 滑动窗口大小（帧数）
+
+data:
+  max_frames: 16
+  image_size: [448, 448]
+
+inference:
+  batch_size: 1
+  max_new_tokens: 256
+  temperature: 0.0
+  do_sample: false
+
+logging:
+  log_dir: "results/logs"
+  save_predictions: true
+  save_figures: true

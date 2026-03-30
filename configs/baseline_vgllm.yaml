@@ -1,0 +1,44 @@
+# ============================================================
+# 基线配置：VG-LLM 全量推理（无任何加速模块）
+# 对应消融组 A-0：Baseline
+# ============================================================
+
+HuggingFace-token:
+  token:"REDACTED"
+
+model:
+  vlm_name: "Qwen/Qwen2.5-VL-7B-Instruct"
+  vggt_name: "facebook/vggt-1b"
+  device: "cuda"
+  dtype: "float16"
+
+# 关闭所有加速模块
+modules:
+  use_gate: false          # 不使用 2D→3D 门控，每帧都调用 VGGT
+  use_zip: false           # 不使用 3D→2D token 压缩
+  use_incremental: false   # 不使用增量 KV Cache
+
+gate:
+  tau: 0.15
+  history_step: 1
+  warmup_frames: 1
+
+zip:
+  keep_ratio: 1.00         # 保留全部 token
+  alpha: 0.60
+  beta: 0.40
+  patch_size: 14
+  min_keep: 16
+
+kv_cache:
+  window_size: 999999      # 无限窗口 = 全量 KV Cache
+
+data:
+  max_frames: 16
+  image_size: [448, 448]
+
+inference:
+  batch_size: 1
+  max_new_tokens: 256
+  temperature: 0.0
+  do_sample: false

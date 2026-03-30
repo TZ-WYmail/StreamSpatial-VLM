@@ -1,0 +1,30 @@
+# ============================================================
+# 消融组 A：模块贡献度分析
+# 通过 run_ablation.py --group A 调用
+# ============================================================
+
+_base_: "../streamspatial_default.yaml"
+
+ablation_group: "A"
+ablation_name: "模块贡献度"
+
+# 子实验配置（由 run_ablation.py 动态覆盖）
+variants:
+  - name: "A-0_Baseline"
+    modules: {use_gate: false, use_zip: false, use_incremental: false}
+
+  - name: "A-1_Gate_only"
+    modules: {use_gate: true, use_zip: false, use_incremental: false}
+
+  - name: "A-2_Zip_only"
+    modules: {use_gate: false, use_zip: true, use_incremental: false}
+
+  - name: "A-3_KV_only"
+    modules: {use_gate: false, use_zip: false, use_incremental: true}
+
+  - name: "A-4_Gate+Zip+KV"
+    modules: {use_gate: true, use_zip: true, use_incremental: true}
+
+eval:
+  datasets: ["spar7m", "scanqa"]
+  metrics: ["accuracy", "em", "fps", "peak_memory_gb"]

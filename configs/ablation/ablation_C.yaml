@@ -1,0 +1,22 @@
+# ============================================================
+# 消融组 C：Token 保留率 r 敏感性分析
+# ============================================================
+
+_base_: "../streamspatial_default.yaml"
+
+ablation_group: "C"
+ablation_name: "Token 保留率 r 敏感性"
+
+variants:
+  - name: "C-1_r=0.25"
+    zip: {keep_ratio: 0.25}
+  - name: "C-2_r=0.50"
+    zip: {keep_ratio: 0.50}
+  - name: "C-3_r=0.75"
+    zip: {keep_ratio: 0.75}
+  - name: "C-4_r=1.00"
+    zip: {keep_ratio: 1.00}
+
+eval:
+  datasets: ["spar7m", "scanrefer"]
+  metrics: ["accuracy", "fps", "zip_compression_ratio", "peak_memory_gb"]

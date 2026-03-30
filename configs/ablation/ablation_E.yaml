@@ -1,0 +1,24 @@
+# ============================================================
+# 消融组 E：重要性权重 α/β 分析
+# ============================================================
+
+_base_: "../streamspatial_default.yaml"
+
+ablation_group: "E"
+ablation_name: "重要性权重 α/β 分析"
+
+variants:
+  - name: "E-1_depth_only"
+    zip: {alpha: 1.00, beta: 0.00}
+  - name: "E-2_pose_only"
+    zip: {alpha: 0.00, beta: 1.00}
+  - name: "E-3_equal"
+    zip: {alpha: 0.50, beta: 0.50}
+  - name: "E-4_default"
+    zip: {alpha: 0.60, beta: 0.40}
+  - name: "E-5_depth_heavy"
+    zip: {alpha: 0.80, beta: 0.20}
+
+eval:
+  datasets: ["spar7m", "scanrefer"]
+  metrics: ["accuracy", "zip_compression_ratio"]

@@ -1,0 +1,51 @@
+# ===== Project-specific: keep necessary files out of VCS =====
+
+# Python caches and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Pytest / Jupyter
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs, runtime files, pid
+*.log
+*.pid
+
+# Large data, model caches, and results (do not track datasets or models)
+data/
+models_cache/
+checkpoints/
+results/
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+.env
+.envrc
+*.swp
+*.lock
+
+# If you intentionally keep project-specific files for Flash/Eclipse,
+# add them explicitly rather than keeping global IDE folders ignored.

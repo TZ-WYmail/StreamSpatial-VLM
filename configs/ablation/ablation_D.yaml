@@ -1,0 +1,22 @@
+# ============================================================
+# 消融组 D：KV Cache 窗口大小 w 敏感性分析
+# ============================================================
+
+_base_: "../streamspatial_default.yaml"
+
+ablation_group: "D"
+ablation_name: "KV Cache 窗口大小 w 敏感性"
+
+variants:
+  - name: "D-1_w=4"
+    kv_cache: {window_size: 4}
+  - name: "D-2_w=8"
+    kv_cache: {window_size: 8}
+  - name: "D-3_w=16"
+    kv_cache: {window_size: 16}
+  - name: "D-4_w=32"
+    kv_cache: {window_size: 32}
+
+eval:
+  datasets: ["spar7m", "scanqa"]
+  metrics: ["accuracy", "fps", "peak_memory_gb"]
