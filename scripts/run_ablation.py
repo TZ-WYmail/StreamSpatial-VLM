@@ -17,8 +17,12 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import sys
 from pathlib import Path
 from typing import Dict, Any, List
+
+# 添加项目根目录到Python路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from eval.eval_spar7m import evaluate_spar7m
 from eval.eval_scanqa import evaluate_scanqa

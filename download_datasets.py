@@ -15,7 +15,7 @@ import json
 
 # 配置
 DEFAULT_DATA_DIR = Path("data/raw")
-HF_TOKEN = "REDACTED"
+HF_TOKEN = os.getenv("HF_TOKEN", None)  # 从环境变量读取，或使用 huggingface-cli login
 
 # 数据集配置
 DATASETS = {
@@ -27,9 +27,9 @@ DATASETS = {
     },
     "spar7m-rgbd": {
         "repo_id": "jasonzhango/SPAR-7M-RGBD",
-        "repo_type": "dataset", 
-        "description": "SPAR-7M 完整版（含深度图和相机参数）",
-        "size": "~100GB"
+        "repo_type": "dataset",
+        "description": "SPAR-7M-RGBD（含深度与相机参数）",
+        "size": "~200GB"
     }
 }
 

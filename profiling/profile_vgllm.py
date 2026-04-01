@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Dict, Any, List
@@ -29,6 +30,9 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from tqdm import tqdm
+
+# 添加项目根目录到 Python 路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from models.gate_2d3d import SemanticGate2D3D
 

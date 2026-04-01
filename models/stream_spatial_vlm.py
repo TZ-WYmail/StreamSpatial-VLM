@@ -101,6 +101,7 @@ class StreamSpatialVLM(nn.Module):
                 self.config.vlm_model_name,
                 torch_dtype=self.config.dtype,
                 device_map=self.config.device,
+                ignore_mismatched_sizes=True,
             )
             self._processor = AutoProcessor.from_pretrained(self.config.vlm_model_name)
             # 提取 ViT 视觉编码器
